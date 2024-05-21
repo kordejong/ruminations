@@ -8,6 +8,7 @@ file(GLOB names_of_files_to_copy
     RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
     CONFIGURE_DEPENDS
     _toc.yml
+    references.bib
     *.md
 )
 file(

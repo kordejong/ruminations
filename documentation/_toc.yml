@@ -6,4 +6,6 @@ root: introduction
 chapters:
 - file: repository
 - file: dependencies
+- file: code
 - file: python
+- file: changelog

@@ -4,19 +4,18 @@ configure_file(
     @ONLY
 )
 
-file(GLOB names_of_files_to_copy
-    RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
-    CONFIGURE_DEPENDS
+foreach(name IN ITEMS
     _toc.yml
+    changelog.md
+    code.md
+    dependencies.md
+    introduction.md
+    python.md
     references.bib
-    *.md
+    repository.md
 )
-file(
-    COPY
-        ${names_of_files_to_copy}
-    DESTINATION
-        ${CMAKE_CURRENT_BINARY_DIR}
-)
+    configure_file(${name} ${name} COPYONLY)
+endforeach()
 
 add_custom_target(documentation.html
     VERBATIM
@@ -40,5 +39,4 @@ set_property(
         ADDITIONAL_CLEAN_FILES
             _build  # jupyter-book
             _config.yml
-            ${names_of_files_to_copy}
 )

@@ -39,6 +39,8 @@ sphinx:
     #     image_dark: YOUR_DARK_LOGO.png
     html_context:
       default_mode: light
+  extra_extensions:
+    - "sphinxcontrib.mermaid"
 # parse:
 #   myst_enable_extensions:
 #     - aside

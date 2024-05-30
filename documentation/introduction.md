@@ -32,7 +32,12 @@ exist. We think it is a good thing if model developers know about these conventi
 the gap we are trying to fill with this document.
 
 Apart from mentioning known conventions and practices we will also provide tips and trick we think are useful
-to know. With everything we describe you may disagree: pick whatever you think is useful.
+to know. We marked guidelines that we think you may not want to follow because they may not apply to all
+situations. These are prepended by "Consider ...".
+
+:::{note}
+With everything we describe you may disagree: pick whatever you think is useful.
+:::
 
 The order in which we discuss topics mostly corresponds with the things you need to know when starting a new
 model development project: setup a repository, handle dependencies, add Python code. There is no need to read

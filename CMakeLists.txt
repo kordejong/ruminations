@@ -7,7 +7,7 @@ project(Ruminations
     HOMEPAGE_URL "https://github.com/computationalgeography/ruminations"
 )
 
-set(RUMINATIONS_TITLE "Ruminations on model development")
+set(RUMINATIONS_TITLE "Ruminations on model development using Python")
 set(RUMINATIONS_AUTHOR "Computational Geography R&D Team")
 set(RUMINATIONS_BOOK_BASENAME "ruminations-${CMAKE_PROJECT_VERSION}")
 

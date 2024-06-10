@@ -1,0 +1,4 @@
+cmake
+docopt
+jupyter-book
+livereload

@@ -28,6 +28,8 @@ jobs:
     env:
       python_version: 3.12
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ env.python_version }}
@@ -35,8 +37,6 @@ jobs:
           cache-dependency-path: "**/requirements.txt"
       - name: Install Python packages
         run: pip3 install -r environment/configuration/requirements.txt
-      - name: Checkout repository
-        uses: actions/checkout@v4
       - name: Build book
         run: |
           mkdir build
@@ -50,6 +50,7 @@ jobs:
         with:
           path: build/documentation/_build/html
   deploy:
+    if: github.repository == 'computationalgeography/ruminations' && github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

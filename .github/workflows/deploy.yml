@@ -41,6 +41,7 @@ jobs:
           cmake -S . -B build
           cmake --build build --config Release --target documentation.html
       - name: Setup pages
+        if: github.repository == 'computationalgeography/ruminations' && github.ref == 'refs/heads/main'
         id: pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

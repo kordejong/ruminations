@@ -2,3 +2,4 @@ cmake
 docopt
 jupyter-book
 livereload
+sphinxcontrib-mermaid

@@ -1,3 +1,4 @@
+(repo)=
 # Repository
 
 Topics related to a project's Git repository.
@@ -12,10 +13,10 @@ Synchronizing all your work with a Git repository on a server has several advant
 - You can more easily work on your project on different platforms (laptop, desktop, ...)
 - You can collaborate with colleagues
 
-:::{note}
+:::{margin} GTD
 GiHub is not Git and Git is not GitHub. GitHub is a popular way for managing Git repositories and provides
-many useful tools for collaborating on a project. Gitlab does something similar in a slightly different way.
-More options exist, like Codeberg and Gitea, and it is also possible to setup a Git server yourself.
+many useful tools for collaborating on a project. GitLab does something similar in a slightly different way.
+More options exist, like Codeberg, Gitea and Forgejo, and it is also possible to setup a Git server yourself.
 :::
 
 
@@ -71,7 +72,7 @@ refer to from the Pre-commit configuration file.
 
 See also:
 
-- TODO link to pre-commit
+- [pre-commit.com](https://pre-commit.com)
 - [](#deps-separate-source-build)
 - [](#py-black)
 - [](#py-mypy)

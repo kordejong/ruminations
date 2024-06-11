@@ -1,5 +1,10 @@
 # Introduction
 
+:::{warning}
+This document is still very much work in progress. You will find lots of TODOs here still. Please come back
+later, after we have filled in some more blanks.
+:::
+
 In this document we provide guidelines for setting up and maintaining a model development project.  It is
 targeted at model developers who are not also experienced software developers, but for example domain experts
 who develop models part-time.

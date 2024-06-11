@@ -26,7 +26,7 @@ install cmake`).
 
 See also:
 
-- TODO Link to CMake home
+- [cmake.org](https://cmake.org)
 - [](#deps-generate-documentation)
 - [](#deps-separate-source-build)
 
@@ -35,6 +35,8 @@ See also:
 ## Automatically generate documentation
 
 TODO
+
+- [sphinx-doc.org](https://www.sphinx-doc.org)
 
 
 (deps-separate-source-build)=

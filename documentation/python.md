@@ -9,6 +9,8 @@ Topics related to using Python for model development.
 
 TODO
 
+- [github.com/conda-forge/miniforge](https://github.com/conda-forge/miniforge)
+
 
 (py-black)=
 ## Use Black
@@ -20,7 +22,7 @@ each time you change them.
 
 See also:
 
-- Link to Black
+- [black.readthedocs.io](https://black.readthedocs.io)
 - [](#py-mypy)
 - [](#repo-pre-commit)
 
@@ -32,6 +34,6 @@ TODO
 
 See also:
 
-- Link to Mypy
+- [mypy-lang.org](https://mypy-lang.org/)
 - [](#py-black)
 - [](#repo-pre-commit)

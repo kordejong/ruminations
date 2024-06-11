@@ -13,10 +13,10 @@ Synchronizing all your work with a Git repository on a server has several advant
 - You can more easily work on your project on different platforms (laptop, desktop, ...)
 - You can collaborate with colleagues
 
-:::{margin} GTD
-GiHub is not Git and Git is not GitHub. GitHub is a popular way for managing Git repositories and provides
-many useful tools for collaborating on a project. GitLab does something similar in a slightly different way.
-More options exist, like Codeberg, Gitea and Forgejo, and it is also possible to setup a Git server yourself.
+:::{margin} GitHub vs Git
+GiHub is not Git and Git is not GitHub. GitHub is a (popular)
+[forge](https://en.wikipedia.org/wiki/Forge_(software)).  Other forges exist as well, like Forgejo, Gitea, and
+GitLab. Some of these forges can also be self-hosted.
 :::
 
 

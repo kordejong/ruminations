@@ -14,10 +14,13 @@ Synchronizing all your work with a Git repository on a server has several advant
 - You can collaborate with colleagues
 
 :::{margin} GitHub vs Git
-GiHub is not Git and Git is not GitHub. GitHub is a (popular)
-[forge](https://en.wikipedia.org/wiki/Forge_(software)).  Other forges exist as well, like Forgejo, Gitea, and
-GitLab. Some of these forges can also be self-hosted.
+GiHub is not Git and Git is not GitHub. GitHub is a [forge](https://en.wikipedia.org/wiki/Forge_(software)).
+Other forges exist as well, like Forgejo, Gitea, and GitLab. Some of these forges can also be self-hosted.
 :::
+
+See also:
+
+- [](#repo-small-changes)
 
 
 (repo-organize)=
@@ -81,20 +84,36 @@ See also:
 (repo-small-changes)=
 ## Make small changes
 
-TODO
+Working on and finishing relatively small tasks has several advantages:
+
+- It decreases the chance of loosing uncommitted work, due to a hardware failure for example
+- It will make it easier to work on different tasks concurrently
+- It will be easier to perform "code archaeology", to figure out what changed when a specific feature was
+  introduced, for example
+- It will give you a nice feeling of making progress
 
 See also:
 
+- [](#repo-remote)
 - [](#repo-issue-per-change)
+- [](#repo-changes-in-branch)
 
 
 (repo-issue-per-change)=
-## Create an issue per change
+## Create an issue / ticket per change
 
-TODO
+An issue is a single piece of work that will improve the code, like a new feature or a bug fix.
+
+This has several advantages:
+
+- It makes it easier to plan releases by associating specific issues that should be solved for each release
+- It will be easier to collaborate. Focussed tasks often require a smaller set of skills, increasing the
+  chance that someone wanting to contribute has these.
+- It will make it easier to work on different tasks concurrently
 
 See also:
 
+- [](#repo-small-changes)
 - [](#repo-name-branch)
 
 
@@ -130,6 +149,13 @@ See also:
 
 (repo-merge-bubbles)=
 ## Use merge bubbles when merging branches
+
+```bash
+git checkout main
+git merge --no-ff gh123
+git push
+git branch -d gh123
+```
 
 TODO
 
@@ -180,7 +206,7 @@ To keep your copy of the repository (AKA downstream repository) up-to-date with 
    ```bash
    # Update your version of upstream's main branch
    git checkout main
-   git pull upstream main
+   git pull --rebase upstream main
    git push
 
    # Rebase your work on updated main branch

@@ -23,7 +23,7 @@ bibtex_bibfiles:
 # Information about where the book exists on the web
 repository:
   url: @CMAKE_PROJECT_HOMEPAGE_URL@
-  path_to_book: doc  # Optional path to your book, relative to the repository root
+  # path_to_book: doc  # Optional path to your book, relative to the repository root
   branch: main  # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book

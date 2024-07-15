@@ -2,7 +2,7 @@ cmake_minimum_required(
     VERSION 3.26)
 project(Ruminations
     LANGUAGES NONE
-    VERSION 0.0.1
+    VERSION 0.1.0
     DESCRIPTION "Ruminations on setting up and maintaining model development projects"
     HOMEPAGE_URL "https://github.com/computationalgeography/ruminations"
 )

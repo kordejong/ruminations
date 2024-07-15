@@ -9,7 +9,7 @@ foreach(name IN ITEMS
     changelog.md
     code.md
     dependencies.md
-    introduction.md
+    index.md
     python.md
     references.bib
     repository.md

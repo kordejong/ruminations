@@ -15,4 +15,3 @@ Topics related to code in general, not specific for Python.
 ## Write simple code
 
 TODO
-

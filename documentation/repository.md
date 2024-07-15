@@ -24,15 +24,15 @@ See also:
 
 
 (repo-organize)=
-## Organize repositories by platform and grouping construct
+## Organize repositories by host name and grouping construct
 
 Before you know it, you will have multiple Git repositories cloned on your computer. You need to decide on a
-way to organize these. One option is to organize them first by platform (like `github` in case of GitHub), and
-then by grouping construct as used on the platform (like the organization on GitHub). This way, repositories
-with the same name but in different organizations, like a fork for example, will end up in a unique location
-in the file system.
+way to organize these. One option is to organize them first by host name (like `github` in case of GitHub),
+and then by grouping construct as used on the hosted forge (like the organization on GitHub). This way,
+repositories with the same name but in different organizations, like a fork for example, will end up in a
+unique location in the file system.
 
-Example file system tree of directories with Git repositories from different platforms:
+Example file system tree of directories with Git repositories from different forges:
 
 ```
 project/
@@ -46,6 +46,9 @@ project/
             faculty/
                 department/
                     cool_package/
+    my_own_server/
+        personal/
+            snippets/
 ```
 
 See also:
@@ -66,8 +69,8 @@ files, large files, and files with different line endings, but also spelling err
 messages, and documentation.
 
 There are tools that you can run to check whether files adhere to certain rules, like the code's formatting
-style, for example. Some of these tools even fix any deviations from the "correct" style. Running these tools
-each time you have made a change quickly becomes a hassle.
+style, for example. Some of these tools can even automatically fix any deviations from the "correct" style.
+Such tools can be very useful, but running them each time you have made a change quickly becomes a hassle.
 
 Pre-commit helps you to automatically run tools that check and fix changes made to your repository every time
 you want to commit these changes. On the website you can find a repository of easy to use hooks which you can
@@ -87,7 +90,8 @@ See also:
 Working on and finishing relatively small tasks has several advantages:
 
 - It decreases the chance of loosing uncommitted work, due to a hardware failure for example
-- It will make it easier to work on different tasks concurrently
+- It will make it easier to work on different tasks concurrently, either by yourself or by team members.
+  Rebasing ongoing work on a huge commit increases the chance of merge conflicts you have to resolve.
 - It will be easier to perform "code archaeology", to figure out what changed when a specific feature was
   introduced, for example
 - It will give you a nice feeling of making progress
@@ -109,7 +113,7 @@ This has several advantages:
 - It makes it easier to plan releases by associating specific issues that should be solved for each release
 - It will be easier to collaborate. Focussed tasks often require a smaller set of skills, increasing the
   chance that someone wanting to contribute has these.
-- It will make it easier to work on different tasks concurrently
+- It will make it easier to work on different tasks concurrently, either by yourself or by team members.
 
 See also:
 
@@ -150,14 +154,37 @@ See also:
 (repo-merge-bubbles)=
 ## Use merge bubbles when merging branches
 
+A merge bubble results from merging a branch and creating a merge commit. A merge commit has two branches as a
+parent: the branch merged and the branch merged into. In general these are a topic branch and the main branch,
+respectively.
+
+Merge bubbles make it convenient to visually inspect which commits are part of a branch, for example using
+this command:
+
+```bash
+git log --oneline --decorate --graph
+* 3ada53d Update deploy.yml
+*   b444544 Merge pull request #1 from computationalgeography/upstream/main
+|\
+| * cbe713b Add deploy workflow
+| * a01095e WIP
+| * b422ffb Update documentation
+| * dba8cd2 WIP
+| * 0f84642 WIP
+| * fb9b4bd WIP
+| * 484ace3 Setup project
+|/
+* 9ac4878 Initial commit
+```
+
+Here is an example of merging a topic branch and creating a merge bubble. The relevant option is `--no-ff`.
+
 ```bash
 git checkout main
 git merge --no-ff gh123
 git push
 git branch -d gh123
 ```
-
-TODO
 
 
 (repo-fork-contribute)=
@@ -167,9 +194,9 @@ If you want to contribute to someone else's repository, to which you do not have
 fork the project first. You can then make changes within a branch of the copy of the original repository. Once
 finished, you can submit a pull request to the original repository, based on your branch.
 
-This process also works for your own repository, to which you do have write permissions. To keep things
-simple, and to understand what people contributing to your repository have to go through, you can use this way
-of contributing to a repository in all cases.
+This process also works for your own repository, to which you actually do have write permissions. To keep
+things simple, and to understand what people contributing to your repository have to go through, you can use
+this way of contributing to a repository in all cases.
 
 Example workflow in case of GitHub:
 
@@ -215,6 +242,10 @@ To keep your copy of the repository (AKA downstream repository) up-to-date with 
    git push
    ```
 
+:::{warning}
+Except from merging updates from upstream's main branch, don't commit other updates to your version of
+upstream's main branch. You want to keep both main branches identical.
+:::
 
 See also:
 

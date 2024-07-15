@@ -1,7 +1,7 @@
 # Introduction
 
 :::{warning}
-This document is still very much work in progress. You will find lots of TODOs here still. Please come back
+This document is still very much work in progress. You will find lots of TODOs here. Please come back
 later, after we have filled in some more blanks.
 :::
 
@@ -32,7 +32,7 @@ different contents. The layout of the repositories will be different, as will th
 of the code, the layout of the code, the naming conventions used in the code, etc. Why is this the case?
 Because each model developer individually makes decisions about these matters while implementing their model,
 based on their preference, experience and the set of tools they use. The problem with this is that it makes it
-harder than necessary to collaborate with each other. Using similar conventions and coding practices make it
+harder than necessary to collaborate with each other. Using similar conventions and coding practices makes it
 easier for us all to understand each other's code. For some of the conventions and practices good guidelines
 exist. We think it is a good thing when model developers know about these, hence this document.
 

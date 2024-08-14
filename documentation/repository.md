@@ -252,6 +252,7 @@ See also:
 - https://docs.github.com/en/pull-requests
 - [](#repo-organize)
 - [](#repo-name-branch)
+- [](#repo-safely-handle-branch-divergence)
 
 
 (repo-clean-repository)=
@@ -352,7 +353,7 @@ may result in conflicts that have to be solved. The good thing is that this can 
 work on the issue. Solving such conflicts is likely to be easier than solving conflicts when merging a ready
 topic branch with an updated master branch. This is especially true when rebasing a topic branch happens
 regularly. Rebasing topic branches on top of an updated main branch can happen as often as needed. Merging a
-topic branch into the main branch happens only once, once the related issue is solved.
+topic branch into the main branch happens only once, after the related issue has been solved.
 
 ```{note}
 Merging a topic branch that has been rebased on the main branch will never result in merge conflicts.
@@ -363,8 +364,56 @@ See also:
 - [](#repo-issue-per-change)
 - [](#repo-changes-in-branch)
 - [](#repo-merge-bubbles)
+- [](#repo-safely-handle-branch-divergence)
 - GitHub provides a "network graph", showing the branching pattern. Find it in your repository: Insights |
   Network. Other forges likely provide a similar feature, as does Git itself, e.g.:
   ```bash
   git log --oneline --decorate --graph
   ```
+
+
+(repo-safely-handle-branch-divergence)=
+## Safely handle branch divergence after rebase
+
+Things can get messy when branches have diverted after a rebase. Git reports this as follows (`git status`):
+
+```txt
+On branch gh707
+Your branch and 'origin/gh707' have diverged,
+and have 43 and 9 different commits each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+```
+
+And when trying the push anyway (`git push`):
+
+```txt
+ ! [rejected]          gh707 -> gh707 (non-fast-forward)
+error: failed to push some refs to 'github.com:my_organization/my_repo.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+```
+
+In this example, the developer rebased a local branch `gh707` on an updated `main` branch (as per
+[](#repo-fork-contribute)). This results in commit hashes that are specific to the `gh707` branch to be
+updated (changed). Although the `gh707`-specific commits in the local branch and the remote branch are
+logically the same, their hashes are now different. Git recognizes this and reports that the brancheѕ must
+have diverted, while logically this is not the case. The local branch is an updated version of the remote
+branch and should be used from now on.
+
+If we do as Git suggests (`git pull`) then we will mess up the local branch by including all `gh707`-specific
+commits twice. The solution is to tell Git that all is well and it should just accept the commits in the local
+branch, overwriting the original hashes of the `gh707`-specific commits:
+
+```bash
+git push --force-with-lease
+```
+
+Using `--force-with-lease` instead of just `--force` prevents overwriting somebody else's commits. In general,
+use `--force-with-lease` instead of `--force`.
+
+See also:
+
+- [](#repo-fork-contribute)
+- [](#repo-clean-repository)

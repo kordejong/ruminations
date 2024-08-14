@@ -377,7 +377,7 @@ See also:
 
 Things can get messy when branches have diverted after a rebase. Git reports this as follows (`git status`):
 
-```txt
+```output
 On branch gh707
 Your branch and 'origin/gh707' have diverged,
 and have 43 and 9 different commits each, respectively.
@@ -386,7 +386,7 @@ and have 43 and 9 different commits each, respectively.
 
 And when trying the push anyway (`git push`):
 
-```txt
+```output
  ! [rejected]          gh707 -> gh707 (non-fast-forward)
 error: failed to push some refs to 'github.com:my_organization/my_repo.git'
 hint: Updates were rejected because the tip of your current branch is behind

@@ -20,7 +20,7 @@ using a tool that will do "whatever is needed" to update generated files. This h
 
 Other tools exist with which you can achieve something similar as CMake. In the domain of software development
 CMake is the most popular dependency management tool. Alternatives that may work better for you are GNU Make,
-Snakemake, TODO (~bison). Each of them has its own set of advantages and disadvantage. When in doubt, just use
+Snakemake, Meson. Each of them has its own set of advantages and disadvantage. When in doubt, just use
 CMake. It is also available as a Python Wheel package (`pip install cmake`) and as a Conda package (`conda
 install cmake`).
 

@@ -252,3 +252,168 @@ See also:
 - https://docs.github.com/en/pull-requests
 - [](#repo-organize)
 - [](#repo-name-branch)
+- [](#repo-safely-handle-branch-divergence)
+
+
+(repo-clean-repository)=
+## Keep the repository clean
+
+A clean repository in a repository that is easy to inspect. Especially when working on a repository with
+multiple people, it is easy for the repository to become a mess. A messy repository is one that is difficult
+to understand. It is hard to figure out who did what and why. Also, a messy repository is hard to work with.
+Git may throw all kinds of error messages at you that may be hard to understand and fix. Spending time on
+fixing messy repositories is a waste and can be prevented by:
+
+- Understand how a clean repository looks like. This determines when it is OK to push commits to a remote.
+- Git workflows for keeping a repository clean. This helps staying productive with Git.
+
+Git is a very flexible and powerful tool, but without some guidelines it is easy to mess things up. Here we
+describe a Git workflow that is simple to use and keeps your repository clean. Many projects use a similar
+workflow.
+
+1. The main branch must always be in a good state. This is the current development version of your project.
+   Never commit anything into main that will break things.
+   ```{mermaid}
+   %%{init: {'theme': 'neutral'} }%%
+   gitGraph:
+       commit id:"1"
+       commit id:"2"
+       commit id:"3"
+   ```
+1. Development is always done in topic branches. The state of the code in this branch is up to the people
+   working on it. Once finished and everything works, the topic branch can be merged into the main branch and
+   deleted.
+   ```{mermaid}
+   %%{init: {'theme': 'neutral'} }%%
+   gitGraph:
+       commit id:"1"
+       branch gh123
+       checkout gh123
+       commit id:"a"
+       checkout main
+       commit id:"2"
+       commit id:"3"
+       checkout gh123
+       commit id:"b"
+       checkout main
+       merge gh123
+       commit id:"4"
+   ```
+1. When merging a branch into the main branch, rebase it first, to prevent hard-to-solve merge conflicts and
+   braided merge patterns.
+   ```{mermaid}
+   %%{init: {'theme': 'neutral'} }%%
+   gitGraph:
+       commit id:"1"
+       commit id:"2"
+       commit id:"3"
+       branch gh123
+       checkout gh123
+       commit id:"a"
+       commit id:"b"
+       checkout main
+       merge gh123
+       commit id:"4"
+   ```
+
+A clean repository has a branching pattern that looks like this:
+
+```{mermaid}
+%%{init: {'theme': 'neutral'} }%%
+gitGraph:
+   commit id:"1"
+   branch gh123
+   checkout gh123
+   commit id:"a"
+   commit id:"b"
+   checkout main
+   merge gh123
+   branch gh456
+   checkout gh456
+   commit id:"c"
+   commit id:"d"
+   commit id:"e"
+   checkout main
+   merge gh456
+   branch gh789
+   checkout gh789
+   commit id:"f"
+   checkout main
+   merge gh789
+   commit id:"2"
+```
+
+It is now easy to (visually) inspect the commits that have contributed to solving the various issues (`123`,
+`456`, `789`). They are part of the corresponding topic branches. Each of the topic branches has contributed a
+series of commits to the main branch.
+
+Merge conflicts can mostly be prevented this way, although they still can occur. Rebasing a topic branch on an
+updated main branch will merge commits from the topic branch with the new commits from the main branch. This
+may result in conflicts that have to be solved. The good thing is that this can happen as part of the ongoing
+work on the issue. Solving such conflicts is likely to be easier than solving conflicts when merging a ready
+topic branch with an updated master branch. This is especially true when rebasing a topic branch happens
+regularly. Rebasing topic branches on top of an updated main branch can happen as often as needed. Merging a
+topic branch into the main branch happens only once, after the related issue has been solved.
+
+```{note}
+Merging a topic branch that has been rebased on the main branch will never result in merge conflicts.
+```
+
+See also:
+
+- [](#repo-issue-per-change)
+- [](#repo-changes-in-branch)
+- [](#repo-merge-bubbles)
+- [](#repo-safely-handle-branch-divergence)
+- GitHub provides a "network graph", showing the branching pattern. Find it in your repository: Insights |
+  Network. Other forges likely provide a similar feature, as does Git itself, e.g.:
+  ```bash
+  git log --oneline --decorate --graph
+  ```
+
+
+(repo-safely-handle-branch-divergence)=
+## Safely handle branch divergence after rebase
+
+Things can get messy when branches have diverted after a rebase. Git reports this as follows (`git status`):
+
+```output
+On branch gh707
+Your branch and 'origin/gh707' have diverged,
+and have 43 and 9 different commits each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+```
+
+And when trying the push anyway (`git push`):
+
+```output
+ ! [rejected]          gh707 -> gh707 (non-fast-forward)
+error: failed to push some refs to 'github.com:my_organization/my_repo.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+```
+
+In this example, the developer rebased a local branch `gh707` on an updated `main` branch (as per
+[](#repo-fork-contribute)). This results in commit hashes that are specific to the `gh707` branch to be
+updated (changed). Although the `gh707`-specific commits in the local branch and the remote branch are
+logically the same, their hashes are now different. Git recognizes this and reports that the brancheѕ must
+have diverted, while logically this is not the case. The local branch is an updated version of the remote
+branch and should be used from now on.
+
+If we do as Git suggests (`git pull`) then we will mess up the local branch by including all `gh707`-specific
+commits twice. The solution is to tell Git that all is well and it should just accept the commits in the local
+branch, overwriting the original hashes of the `gh707`-specific commits:
+
+```bash
+git push --force-with-lease
+```
+
+Using `--force-with-lease` instead of just `--force` prevents overwriting somebody else's commits. In general,
+use `--force-with-lease` instead of `--force`.
+
+See also:
+
+- [](#repo-fork-contribute)
+- [](#repo-clean-repository)

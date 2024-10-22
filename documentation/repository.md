@@ -3,6 +3,12 @@
 
 Topics related to a project's Git repository.
 
+See also:
+
+- https://git-scm.com/book
+- https://rogerdudler.github.io/git-guide/
+- https://matthew-brett.github.io/curious-git/
+
 
 (repo-remote)=
 ## Put a bare repository on a server
@@ -417,3 +423,45 @@ See also:
 
 - [](#repo-fork-contribute)
 - [](#repo-clean-repository)
+
+
+(repo-understand-git-objects)=
+## Understand Git objects
+
+Becoming comfortable with using Git involves climbing a learning curve. Git behaves quite differently from
+previous generations of popular version control systems. It is easy to end up in a confusing situation that
+seems hard to fix. It is not absolutely necessary to understand something about Git's internals, but it
+definitely helps with understanding why Git behaves the way it does.
+
+At the lower levels, Git is actually not that complicated. There are only a few kinds of "objects" that are
+managed by Git. Each of them is stored in compressed form, in a file named after its corresponding SHA-1 hash
+value. You can find these files in the `.git/objects` subdirectory of your repository.
+
+1. Blob: the contents of a file, like Python source code or binary image data
+1. Tree: the SHA-1's of the set of blobs and their names, at some location in the repository's hierarchy, and
+   the SHA-1's of the set of sub-tree's and their names. **Trees refer to blobs and other trees.**
+1. Commit: meta-information about the state of the repository: the SHA-1 of the repository's root tree, a
+   message, a time point, the name of the committer. **Commits refer to trees.**
+1. Annotated tag: meta-information about a commit: the SHA-1 of the commit, a message, a time point, the name
+   of the tagger. **Annotated tags refer to commits.**
+
+These three kinds of Git objects make up most of the "database" in a Git repository. Other files in the
+database are related to lightweight tags and branches, which can be seen as being pointers to commits. It is
+easy to inspect the content of the Git objects, using the `git cat-file` command. See the links below for more
+information.
+
+<!--
+TODO Figure with hierarchy of objects and other stuff.
+
+blob: referenced by one or more trees, refers to nothing
+
+tree: referenced by commits and other trees, refers to blobs and other trees
+
+commit: referenced by branches, lightweight tags, annotated tags, refers to trees and other commits(?)
+-->
+
+
+See also:
+
+- [Video: Fear not the SHA](https://youtu.be/P6jD966jzlk)
+- https://git-scm.com/book/en/v2/Git-Internals-Git-Objects

@@ -1,17 +1,18 @@
 (repo)=
+
 # Repository
 
 Topics related to a project's Git repository.
 
 See also:
 
-- https://git-scm.com/book
-- https://rogerdudler.github.io/git-guide/
-- https://blog.gitbutler.com/git-tips-and-tricks/
-- https://matthew-brett.github.io/curious-git/
-
+- <https://git-scm.com/book>
+- <https://rogerdudler.github.io/git-guide/>
+- <https://blog.gitbutler.com/git-tips-and-tricks/>
+- <https://matthew-brett.github.io/curious-git/>
 
 (repo-remote)=
+
 ## Put a bare repository on a server
 
 Synchronizing all your work with a Git repository on a server has several advantage:
@@ -29,8 +30,8 @@ See also:
 
 - [](#repo-small-changes)
 
-
 (repo-organize)=
+
 ## Organize repositories by host name and grouping construct
 
 Before you know it, you will have multiple Git repositories cloned on your computer. You need to decide on a
@@ -63,8 +64,8 @@ See also:
 - [](#repo-fork-contribute)
 - [](#deps-separate-source-build)
 
-
 (repo-pre-commit)=
+
 ## Use pre-commit
 
 Pre-commit helps to prevent that your repository becomes a mess. For example, over time you may want to switch
@@ -90,8 +91,8 @@ See also:
 - [](#py-black)
 - [](#py-mypy)
 
-
 (repo-small-changes)=
+
 ## Make small changes
 
 Working on and finishing relatively small tasks has several advantages:
@@ -109,8 +110,8 @@ See also:
 - [](#repo-issue-per-change)
 - [](#repo-changes-in-branch)
 
-
 (repo-issue-per-change)=
+
 ## Create an issue / ticket per change
 
 An issue is a single piece of work that will improve the code, like a new feature or a bug fix.
@@ -127,8 +128,8 @@ See also:
 - [](#repo-small-changes)
 - [](#repo-name-branch)
 
-
 (repo-name-branch)=
+
 ## Name branch after issue ID
 
 A branch requires a name. To keep things simple and not have to think about names all the time, just name the
@@ -144,8 +145,8 @@ commit messages. To understand why a branch was merged, just lookup the issue wi
 
 - [](#repo-merge-bubbles)
 
-
 (repo-changes-in-branch)=
+
 ## Make changes in a branch
 
 Whenever you want to make a change to a repository, put the updates in a separate branch. This will make it
@@ -157,8 +158,8 @@ See also:
 - [](#repo-issue-per-change)
 - [](#repo-small-changes)
 
-
 (repo-merge-bubbles)=
+
 ## Use merge bubbles when merging branches
 
 A merge bubble results from merging a branch and creating a merge commit. A merge commit has two branches as a
@@ -193,8 +194,8 @@ git push
 git branch -d gh123
 ```
 
-
 (repo-fork-contribute)=
+
 ## Fork, then contribute
 
 If you want to contribute to someone else's repository, to which you do not have write permissions, you must
@@ -214,6 +215,7 @@ Example workflow in case of GitHub:
    ```bash
    git checkout -b gh123
    ```
+
 1. Push branch to your version of the repository
 
    ```bash
@@ -256,13 +258,13 @@ upstream's main branch. You want to keep both main branches identical.
 
 See also:
 
-- https://docs.github.com/en/pull-requests
+- <https://docs.github.com/en/pull-requests>
 - [](#repo-organize)
 - [](#repo-name-branch)
 - [](#repo-safely-handle-branch-divergence)
 
-
 (repo-clean-repository)=
+
 ## Keep the repository clean
 
 A clean repository in a repository that is easy to inspect. Especially when working on a repository with
@@ -280,6 +282,7 @@ workflow.
 
 1. The main branch must always be in a good state. This is the current development version of your project.
    Never commit anything into main that will break things.
+
    ```{mermaid}
    %%{init: {'theme': 'neutral'} }%%
    gitGraph:
@@ -287,9 +290,11 @@ workflow.
        commit id:"2"
        commit id:"3"
    ```
+
 1. Development is always done in topic branches. The state of the code in this branch is up to the people
    working on it. Once finished and everything works, the topic branch can be merged into the main branch and
    deleted.
+
    ```{mermaid}
    %%{init: {'theme': 'neutral'} }%%
    gitGraph:
@@ -306,8 +311,10 @@ workflow.
        merge gh123
        commit id:"4"
    ```
+
 1. When merging a branch into the main branch, rebase it first, to prevent hard-to-solve merge conflicts and
    braided merge patterns.
+
    ```{mermaid}
    %%{init: {'theme': 'neutral'} }%%
    gitGraph:
@@ -374,12 +381,13 @@ See also:
 - [](#repo-safely-handle-branch-divergence)
 - GitHub provides a "network graph", showing the branching pattern. Find it in your repository: Insights |
   Network. Other forges likely provide a similar feature, as does Git itself, e.g.:
+
   ```bash
   git log --oneline --decorate --graph
   ```
 
-
 (repo-safely-handle-branch-divergence)=
+
 ## Safely handle branch divergence after rebase
 
 Things can get messy when branches have diverted after a rebase. Git reports this as follows (`git status`):
@@ -425,8 +433,8 @@ See also:
 - [](#repo-fork-contribute)
 - [](#repo-clean-repository)
 
-
 (repo-understand-git-objects-references)=
+
 ## Understand Git objects and references
 
 Becoming comfortable with using Git involves climbing a learning curve. Git behaves quite differently from
@@ -435,8 +443,9 @@ seems hard to fix. It is not absolutely necessary to understand something about 
 definitely helps getting comfortable with Git.
 
 At the lower levels, Git is actually not that complicated. There are only a few kinds of "objects" that are
-managed by Git. Each of them is stored in compressed form, in a file named after its corresponding SHA-1 hash
-value. You can find these files in the `.git/objects` subdirectory of your repository.
+managed by Git. Each of them is stored in compressed form, in a file named after its corresponding
+[SHA-1](https://en.wikipedia.org/wiki/SHA-1) [hash](https://en.wikipedia.org/wiki/Hash_function) value. You
+can find these files in the `.git/objects` subdirectory of your repository.
 
 1. Blob: the contents of a file, like Python source code or binary image data
 1. Tree: the SHA-1's of the set of blobs and their names, at some location in the repository's hierarchy, and
@@ -461,10 +470,8 @@ which are stored in `.git/refs`.
 
 TODO Branches
 
-
 Other files in the
 database are related to lightweight tags and branches, which can be seen as being pointers to commits.
-
 
 ```{mermaid}
     :caption: Relations between the four kinds of Git objects, and branches and lightweight tags
@@ -487,5 +494,5 @@ flowchart TD
 See also:
 
 - [Video: Fear not the SHA](https://youtu.be/P6jD966jzlk)
-- https://git-scm.com/book/en/v2/Git-Internals-Git-Objects
-- https://git-scm.com/book/en/v2/Git-Internals-Git-References
+- <https://git-scm.com/book/en/v2/Git-Internals-Git-Objects>
+- <https://git-scm.com/book/en/v2/Git-Internals-Git-References>

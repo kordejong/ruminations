@@ -2,7 +2,7 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: @RUMINATIONS_TITLE@
-copyright: 2024 -- This work is licensed under Creative Commons Attribution 4.0 International (CC-BY-4.0)
+copyright: 2024 - now -- This work is licensed under Creative Commons Attribution 4.0 International (CC-BY-4.0)
 author: @RUMINATIONS_AUTHOR@
 # TODO logo: logo.png
 
